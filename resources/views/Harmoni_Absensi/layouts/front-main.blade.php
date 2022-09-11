@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SISTAMA | Mengelola absensi karyawan magang dengan mudah</title>
+    <title>SISTAMA | Absensi jadi lebih mudah dengan SISTAMA</title>
     {{-- Icon --}}
     <link rel="icon" type="image/*" href="{{ asset('Assets/img/sistama_logo.png') }}">
 
@@ -29,7 +29,10 @@
 <body  id="your-element-selector" style="height: 100vh">
 
     <div class="d-flex flex-column justify-content-center align-items-start p-5 h-100 text-white">
-        <div><h2 class="m-0">S I S T A M A</h2></div>
+        <div class="d-flex align-items-center">
+            <img class="bg-white mr-3 rounded-pill p-1" src="{{ asset('Assets/img/sistama_logo.png') }}" alt="" width="100">
+            <h1 class="m-0 font-weight-bolder">S I S T A M A</h1>
+        </div>
         <div class="d-flex align-items-center" style="height: 80px;"><h2 class="m-0" id="element"></h2></div>
         <div class="row w-100 mt-3 border-2 border-top pt-3" style="max-width: 450px">
             <div class="col-6">
@@ -81,17 +84,6 @@
                     <label class="form-label" for="password">Password</label>
                     <input type="password" id="password" class="form-control" name="password" />
                     <span id="password_error" class="error">Lorem ipsum dolor sit amet.</span>
-                </div>
-                
-                <!-- Posisi input -->
-                <div class="form-outline mb-4" id="posisi">
-                    <label class="form-label" for="posisi">Jabatan</label>
-                    <select id="posisi" class="form-control" name="posisi">
-                        <option value="" selected disabled>--- Pilih Jabatan ---</option>
-                        <option>HRD</option>
-                        <option>Karyawan</option>
-                    </select>
-                    <span id="posisi_error" class="error">Lorem ipsum dolor sit amet.</span>
                 </div>
                 
                 <!-- Submit button -->

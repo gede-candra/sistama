@@ -11,14 +11,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
-{
+{    
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index(){
         return view(".Harmoni_Absensi.layouts.front-main");
     }
+        
+    /**
+     * register
+     *
+     * @param  mixed $registerRequest
+     * @return void
+     */
     public function register(RegisterRequest $registerRequest)
     {
-        $validasi = $registerRequest->only(["name", "email", "password", "posisi"]);
-        $validasi["password"] = Hash::make($validasi['password']);
+        $validasi = $registerRequest->only(["name", "email", "password"]);
+
+        $validasi["password"]   = Hash::make($validasi['password']);
+        $validasi["role_id"]    = 3;
              
         User::create($validasi);
 
@@ -26,7 +40,13 @@ class MainController extends Controller
             "response" => "Data telah berhasil ditambahkan",
         ]);
     }
-
+    
+    /**
+     * login
+     *
+     * @param  mixed $loginRequest
+     * @return void
+     */
     public function login(LoginRequest $loginRequest)
     {
         $validasi = $loginRequest->only(["email", "password"]);
@@ -52,7 +72,13 @@ class MainController extends Controller
             ]);
         }
     }
-
+    
+    /**
+     * logout
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function logout(Request $request) {
         $request->session()->flush();
         Auth::logout();

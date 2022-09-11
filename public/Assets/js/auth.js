@@ -6,7 +6,6 @@ function login() {
    // form 
    $("#namalengkap").addClass('d-none')
    $("#route").val("login")
-   $("#posisi").addClass('d-none')
    $("#name").val("")
    $("#email").val("")
    $("#password").val("")
@@ -19,12 +18,11 @@ function login() {
 }
 function register() {
    $('#AuthModal').modal('show')
-   $('#AuthModalLabel').html('Form Register')
+   $('#AuthModalLabel').html('Form Register Karyawan Magang')
    $('#btn-form').html('Register')
 
    // form 
    $("#namalengkap").removeClass('d-none')
-   $("#posisi").removeClass('d-none')
    $("#route").val("register")
    $("#name").val("")
    $("#email").val("")
@@ -34,7 +32,6 @@ function register() {
    $("#name_error").html("")
    $("#email_error").html("")
    $("#password_error").html("")
-   $("#posisi_error").html("")
    $(".form-outline input").removeClass("error")
 }
 
@@ -102,13 +99,11 @@ $("#formAuth").submit(function (e) {
             $("#name_error").html("")
             $("#email_error").html("")
             $("#password_error").html("")
-            $("#posisi_error").html("")
             if (auth != "login") {
                $("#name_error").html(data.responseJSON.errors.name)
             }
             $("#email_error").html(data.responseJSON.errors.email)
             $("#password_error").html(data.responseJSON.errors.password)
-            $("#posisi_error").html(data.responseJSON.errors.posisi)
          }
       }else{
          $('#AuthModal').modal('hide')

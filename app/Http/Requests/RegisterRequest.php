@@ -27,7 +27,6 @@ class RegisterRequest extends FormRequest
             'password' => 'required',
             'name'     => 'required',
             'email'    => 'required|unique:users|email:dns',
-            'posisi'   => 'required',
         ];
     }
 
@@ -38,7 +37,6 @@ class RegisterRequest extends FormRequest
             'email.required'    => 'Email tidak boleh kosong.',
             'email.unique'      => 'Email ini sudah terdaftar.',
             'email.email'       => 'Email tidak valid.',
-            'posisi.required'   => 'Posisi tidak boleh kosong.',
             'password.required' => 'Password tidak boleh kosong.',
         ];
     }

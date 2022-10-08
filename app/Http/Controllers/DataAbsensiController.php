@@ -2,32 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
+use App\Exports\AttendanceExport;
+use App\Models\Attendance;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class DataAbsensiController extends Controller
 {
     public function index()
     {
-        return view('Harmoni_Absensi/program/hrd/absensi/index', [
+        return view('program.data-absensi.index', [
             "title_page" => "Data Absensi",
         ]);
     }
 
     public function datatables()
     {
-        $absensi = Absensi::all();
+        $absensi = Attendance::all();
         return DataTables::of($absensi)
                         ->addIndexColumn()
                         ->addColumn("user_id", function($absensi){
-                            $user = User::find($absensi->user_id);
-                            return $user->name;
+                            return $absensi->users->name;
                         })
                         ->addColumn("keterangan", function($absensi){
-                            return ($absensi->jam_masuk != "" && $absensi->jam_keluar != "") ? "Hadir" : "Belum Pulang";
+                            return ($absensi->addmission_time != "" && $absensi->time_out != "") ? "Hadir" : "Belum Pulang";
                         })
                         ->rawColumns(["opsi"])
                         ->make(true);
+    }
+    
+    /**
+     * export
+     *
+     * @return void
+     */
+    public function export()
+    {
+        return Excel::download(new AttendanceExport, 'Data-Absensi-Sistama.xlsx'); 
     }
 }

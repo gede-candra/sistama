@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onDelete('cascade');
-            $table->time('jam_masuk');
-            $table->time('jam_keluar')->nullable();
-            $table->date('tgl_kerja');
+            $table->time('addmission_time');
+            $table->time('time_out')->nullable();
+            $table->date('work_date');
             $table->timestamps();
         });
     }

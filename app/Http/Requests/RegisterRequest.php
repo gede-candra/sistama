@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'password' => 'required',
             'name'     => 'required',
-            'email'    => 'required|unique:users|email:dns',
+            'email'    => 'required|unique:users',
         ];
     }
 
@@ -36,7 +36,6 @@ class RegisterRequest extends FormRequest
             'name.required'     => 'Nama Lengkap tidak boleh kosong.',
             'email.required'    => 'Email tidak boleh kosong.',
             'email.unique'      => 'Email ini sudah terdaftar.',
-            'email.email'       => 'Email tidak valid.',
             'password.required' => 'Password tidak boleh kosong.',
         ];
     }

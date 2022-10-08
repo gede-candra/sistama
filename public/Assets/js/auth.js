@@ -73,15 +73,13 @@ $("#formAuth").submit(function (e) {
       
       if (url == "/login") {
          // console.log("Anda Berhasil Login");
-         if (data.respon == "HRD") {
-            window.location = "hrd";
-         }else if(data.respon == "Karyawan"){
-            window.location = "karyawan";
+         if (data.respon == "Login Berhasil") {
+            window.location = "dashboard";
          }else {
             Swal.fire({
                icon: 'error',
                title: 'Oops, Login Gagal!',
-               text: 'Email atau Password anda mungkin salah, Silahkan coba lagi atau hubungi bagian HRD untuk keterangan lebih lanjut.',
+               text: 'Email atau Password anda mungkin salah, Silahkan coba lagi atau hubungi bagian Admin untuk keterangan lebih lanjut.',
            })
          }
       } else {

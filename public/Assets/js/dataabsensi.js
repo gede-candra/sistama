@@ -21,16 +21,16 @@ $("#dataTable").DataTable({
       name: 'user_id'
    },
    {
-      data: 'jam_masuk',
-      name: 'jam_masuk'
+      data: 'addmission_time',
+      name: 'addmission_time'
    },
    {
-      data: 'jam_keluar',
-      name: 'jam_keluar'
+      data: 'time_out',
+      name: 'time_out'
    },
    {
-      data: 'tgl_kerja',
-      name: 'tgl_kerja',
+      data: 'work_date',
+      name: 'work_date',
    },
    {
       data: 'keterangan',

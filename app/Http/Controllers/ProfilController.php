@@ -18,7 +18,7 @@ class ProfilController extends Controller
         $data["userAuth"] =$userAuth;
 
         
-        return view('Harmoni_Absensi/program/UserProfil', $data);
+        return view('program.UserProfil', $data);
     }
 
     public function update(ProfilUserRequest $profilUserRequest)

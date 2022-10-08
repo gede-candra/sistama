@@ -51,7 +51,6 @@ $("#formUbahPassword").submit(function(e) {
                   $("#pass_lama_error").html(data.responseJSON.errors.pass_lama)
                   $("#pass_baru_error").html(data.responseJSON.errors.pass_baru)
                   $("#konfirmasi_pass_baru_error").html(data.responseJSON.errors.konfirmasi_pass_baru)
-                  console.log(data);
                } else {
                   Swal.fire({
                      position: 'top',
@@ -59,7 +58,6 @@ $("#formUbahPassword").submit(function(e) {
                      text: "Silahkan coba lagi atau hubungi bagian admin untuk keterangan lebih lanjut.",
                      icon: 'error',
                   })
-                  console.log(data);
                }
          })
       }

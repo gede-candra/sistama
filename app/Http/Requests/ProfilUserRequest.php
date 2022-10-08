@@ -27,17 +27,16 @@ class ProfilUserRequest extends FormRequest
         $user = User::find($this->id_user);
         return [
             'name'     => 'required',
-            'email'    => $this->email == $user->email ? ['required', 'email:rfc,dns'] : ['required', 'email:rfc,dns', 'unique:users,email'],
+            'email'    => $this->email == $user->email ? ['required'] : ['required', 'unique:users,email'],
         ];
     }
 
     public function messages()
     {
         return [
-            "name.required" => "Nama Lengkap tidak boleh kosong.",
-            "email.required" => "Email tidak boleh kosong.",
-            "email.unique" => "Email ini sudah digunakan.",
-            "email.email" => "Email tidak valid.",
+            "name.required"     => "Nama Lengkap tidak boleh kosong.",
+            "email.required"    => "Email tidak boleh kosong.",
+            "email.unique"      => "Email ini sudah digunakan.",
         ];
     }
 }

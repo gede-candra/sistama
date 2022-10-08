@@ -18,7 +18,7 @@ class MainController extends Controller
      * @return void
      */
     public function index(){
-        return view(".Harmoni_Absensi.layouts.front-main");
+        return view("layouts.front-main");
     }
         
     /**
@@ -50,22 +50,11 @@ class MainController extends Controller
     public function login(LoginRequest $loginRequest)
     {
         $validasi = $loginRequest->only(["email", "password"]);
-
+        
         if (Auth::attempt($validasi)) {
-            $user = Auth::user();
-            if ($user->posisi == "HRD") {
-                return response()->json([
-                    "respon" => "HRD"
-                ]);
-            }elseif($user->posisi == "Karyawan"){
-                return response()->json([
-                    "respon" => "Karyawan"
-                ]);
-            }else{
-                return response()->json([
-                    "respon" => "Tidak Ada Posisi"
-                ]);
-            }
+            return response()->json([
+                "respon" => "Login Berhasil"
+            ]);
         } else{
             return response()->json([
                 "respon" => "Login Gagal"

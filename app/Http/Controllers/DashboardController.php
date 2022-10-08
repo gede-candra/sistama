@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
+use App\Models\Attendance;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,15 +15,12 @@ class DashboardController extends Controller
      */
     public function __invoke()
     {
-        $data_users             = User::all()->where('posisi', 'Karyawan');
-        $data_absensis          = Absensi::all();
-        $auth                   = Auth::user();
-        $data_absensis_karyawan = Absensi::all()->where("user_id", $auth->id);
-        return view('Harmoni_Absensi/program/Dashboard', [
+        $data_users     = User::all()->where('role_id', 3);
+        $data_absensi   = Attendance::all();
+        return view('program.Dashboard', [
             "title_page"        => "Dashboard",
             "users"             => $data_users,
-            "absensis"          => $data_absensis,
-            "absensis_karyawan" => $data_absensis_karyawan,
+            "absensis"          => $data_absensi,
         ]);
     }
 }

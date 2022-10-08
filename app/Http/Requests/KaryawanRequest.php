@@ -27,17 +27,16 @@ class KaryawanRequest extends FormRequest
         return [
             'password' => $this->id_user ? '' : ['required'],
             'name'     => 'required',
-            'email'    => $this->id_user ? ['required', 'email:dns', Rule::unique('users', "email")->ignore($this->id_user)] : ['required', 'email:dns', 'unique:users,email'],
+            'email'    => $this->id_user ? ['required', Rule::unique('users', "email")->ignore($this->id_user)] : ['required', 'unique:users,email'],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Nama Lengkap tidak boleh kosong.',
-            'email.required' => 'Email tidak boleh kosong.',
-            'email.unique' => 'Email ini sudah terdaftar.',
-            'email.email' => 'Email tidak valid.',
+            'name.required'     => 'Nama Lengkap tidak boleh kosong.',
+            'email.required'    => 'Email tidak boleh kosong.',
+            'email.unique'      => 'Email ini sudah terdaftar.',
             'password.required' => 'Password tidak boleh kosong.',
         ];
     }

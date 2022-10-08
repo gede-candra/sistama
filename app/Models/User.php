@@ -43,13 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function absensis()
+    public function attendances()
     {
-        return $this->hasMany(Absensi::class);
+        return $this->hasMany(Attendance::class);
     }
 
     public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

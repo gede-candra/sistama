@@ -12,7 +12,7 @@ class UbahPasswordController extends Controller
 {
     public function index(){
         $userAuth = Auth::user();
-        return view('Harmoni_Absensi/program/UbahPassword', [
+        return view('program.UbahPassword', [
             "title_page" => "Ubah Password",
             "userAuth"   => $userAuth,
         ]);

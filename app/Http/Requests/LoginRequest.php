@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'    => 'required|email:dns',
+            'email'    => 'required',
             'password' => 'required',
         ];
     }
@@ -32,8 +32,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            "email.required" => "Email tidak boleh kosong.",
-            "email.email" => "Email tidak valid.",
+            "email.required"    => "Email tidak boleh kosong.",
             "password.required" => "Password tidak boleh kosong.",
         ];
     }

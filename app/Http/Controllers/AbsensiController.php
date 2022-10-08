@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
+use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,8 +21,8 @@ class AbsensiController extends Controller
         $carbon   = new Carbon();
         $userAuth = Auth::user();
         $user     = User::find($userAuth->id);
-        return view('Harmoni_Absensi/program/karyawan/absensi/index', [
-            "title_page" => "Absensi Karyawan",
+        return view('program.magang.absensi.index', [
+            "title_page" => "Absensi Karyawan Magang",
             "waktu"      => date("Y-m-d", strtotime($carbon)),
             "user"       => $user,
         ]);
@@ -30,11 +30,11 @@ class AbsensiController extends Controller
 
     public function datatables()
     {
-        $absensi = Absensi::all()->where("user_id", Auth::user()->id);
-        return DataTables::of($absensi)
+        $attendance = Attendance::all()->where("user_id", Auth::user()->id);
+        return DataTables::of($attendance)
                         ->addIndexColumn()
-                        ->addColumn("keterangan", function($absensi){
-                            return ($absensi->jam_masuk != "" && $absensi->jam_keluar != "") ? "Hadir" : "Belum Pulang";
+                        ->addColumn("keterangan", function($attendance){
+                            return ($attendance->addmission_time != "" && $attendance->time_out != "") ? "Hadir" : "Belum Pulang";
                         })
                         ->rawColumns(["opsi"])
                         ->make(true);
@@ -56,23 +56,23 @@ class AbsensiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Absensi $absensi)
+    public function store(Attendance $attendance)
     {
         $waktu    = new Carbon();
         $userAuth = Auth::user();
 
-        $absensi->user_id = $userAuth->id;
-        $absensi->jam_masuk = date("H:i:s ", strtotime($waktu));
-        $absensi->tgl_kerja = $waktu;
+        $attendance->user_id = $userAuth->id;
+        $attendance->addmission_time = date("H:i:s ", strtotime($waktu));
+        $attendance->work_date = $waktu;
 
-        $absensi->save();
+        $attendance->save();
 
         $userAuth = Auth::user();
         $user     = User::find($userAuth->id);
 
         return response()->json([
             "response"   => "Absen Kedatangan Berhasil",
-            "id_absensi" => $user->absensis->last()->id,
+            "id_absensi" => $user->attendances->last()->id,
         ]);
     }
 
@@ -108,9 +108,9 @@ class AbsensiController extends Controller
     public function update($id)
     {
         $waktu    = new Carbon();
-        $absensi  = Absensi::find($id);
+        $absensi  = Attendance::find($id);
 
-        $absensi->jam_keluar = date("H:i:s ", strtotime($waktu));
+        $absensi->time_out = date("H:i:s ", strtotime($waktu));
 
         $absensi->save();
 

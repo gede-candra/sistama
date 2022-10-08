@@ -4,6 +4,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAbsensiController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PicketScheduleController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UbahPasswordController;
 use App\Http\Controllers\UserController;
@@ -20,43 +21,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index'])->name("frontend");
-Route::post('/register', [MainController::class, 'register'])->name("register");
-Route::post('/login', [MainController::class, 'login'])->name("login");
-Route::get('/logout', [MainController::class, 'logout'])->name("logout");
+Route::middleware(['guest'])->group(function () {
+   Route::get('/', [MainController::class, 'index'])->name("frontend");
+   Route::post('/register', [MainController::class, 'register'])->name("register");
+   Route::post('/login', [MainController::class, 'login'])->name("login");
+});
 
 // --- AUTHENTICATION ---
-Route::group(["middleware" => ['auth']], function () {
-    Route::group(["middleware" => ["cek_login:HRD"]], function(){
-      // --- HALAMAN HRD ---
-      // Dashboard
-      Route::get('/hrd', DashboardController::class)->name("dashboard");
-      // Karyawan
-      Route::resource('/hrd/karyawan', UserController::class);
-      Route::post('/hrd/updatekaryawan', [UserController::class, 'update'])->name('updatekaryawan');
-      Route::get("/hrd/table", [UserController::class, 'datatables'])->name('datatables');
-      // Absensi
-      Route::get('/hrd/absensi', [DataAbsensiController::class, 'index']);
-      Route::get("/hrd/absensi-table",[DataAbsensiController::class, 'datatables'])->name('absensi_datatables');
-      // Profile
-      Route::get('/hrd/profil-saya', [ProfilController::class, 'index'])->name("profilUserPage_HRD");
-      Route::post('/hrd/profil-saya/edit', [ProfilController::class, 'update'])->name("editProfilUser_HRD");
-      // Ubah Password
-      Route::get('/hrd/ubah-password', [UbahPasswordController::class, 'index'])->name("ubahPasswordPage_HRD");
-      Route::post('/hrd/ubah-password/ubah', [UbahPasswordController::class, 'update'])->name("prosesUbahPassword_HRD");
+Route::middleware(['auth'])->group(function () {
+   // Dashboard
+   Route::get('dashboard', DashboardController::class)->name("dashboard");
+   // Karyawan
+   Route::prefix('data-karyawan-magang')->name('dataMagang.')->middleware('can:isNotIntern')->group(function () {
+      Route::resource('/', UserController::class);
+      Route::post('{id}', [UserController::class, 'update'])->name('update');
+      Route::get('{id}/edit', [UserController::class, 'edit'])->name('edit');
+      Route::delete('{id}', [UserController::class, 'destroy'])->name('destroy');
+      Route::get("table", [UserController::class, 'datatables'])->name('datatable');
+      Route::get("export", [UserController::class, 'export'])->name('export');
    });
-   Route::group(["middleware" => ["cek_login:Karyawan"]], function(){
-       // --- HALAMAN KARYAWAN ---
-      // Dashboard
-      Route::get('/karyawan', DashboardController::class)->name("dashboardkaryawan");
-      // Absensi
-      Route::resource('/karyawan/absensi', AbsensiController::class);
-      Route::get("/karyawan/absensi-table", [AbsensiController::class, 'datatables'])->name('absensi_datatables_karyawan');
-      // Profile
-      Route::get('/karyawan/profil-saya', [ProfilController::class, 'index'])->name("profilUserPage_Karyawan");
-      Route::post('/karyawan/profil-saya/edit', [ProfilController::class, 'update'])->name("editProfilUser_Karyawan");
-      // Ubah Password
-      Route::get('/karyawan/ubah-password', [UbahPasswordController::class, 'index'])->name("ubahPasswordPage_Karyawan");
-      Route::post('/karyawan/ubah-password/ubah', [UbahPasswordController::class, 'update'])->name("prosesUbahPassword_Karyawan");
+   // Data Absensi
+   Route::prefix('data-absensi')->name('dataAbsensi.')->middleware('can:isNotIntern')->group(function () {
+      Route::get('/', [DataAbsensiController::class, 'index'])->name('index');
+      Route::get("/table",[DataAbsensiController::class, 'datatables'])->name('datatable');
+      Route::get("/export",[DataAbsensiController::class, 'export'])->name('export');
    });
+   // Data Absensi
+   Route::prefix('absensi')->name('absensi.')->middleware('can:isIntern')->group(function () {
+      Route::resource('/', AbsensiController::class);
+      Route::put('/{id}', [AbsensiController::class, 'update'])->name('update');
+      Route::get("/table",[AbsensiController::class, 'datatables'])->name('datatable');
+   });
+   // Data Absensi
+   Route::prefix('jadwal-piket')->name('picket.')->group(function () {
+      Route::get("/",[PicketScheduleController::class, 'index'])->name('index');
+      Route::get("/table",[PicketScheduleController::class, 'datatables'])->name('datatable');
+      Route::get("/search",[PicketScheduleController::class, 'search'])->name('search');
+      Route::post("/ubah",[PicketScheduleController::class, 'update'])->name('update');
+   });
+   // Profile
+   Route::prefix('profil-saya')->name('profile.')->group(function () {
+      Route::get('/', [ProfilController::class, 'index'])->name("index");
+      Route::post('/ubah', [ProfilController::class, 'update'])->name("update");
+   });
+   // Ubah Password
+   Route::prefix('ubah-password')->name('changePassword.')->group(function () {
+      Route::get('/', [UbahPasswordController::class, 'index'])->name("index");
+      Route::post('/ubah', [UbahPasswordController::class, 'update'])->name("update");
+   });
+   // Logout
+   Route::get('/logout', [MainController::class, 'logout'])->name("logout");
 });

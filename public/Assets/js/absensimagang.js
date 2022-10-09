@@ -61,7 +61,7 @@ $("#formAbsensi").submit(function(e) {
       title: 'Yakin ingin absen?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#4cb8c4',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
       }).then((result) => {
@@ -86,9 +86,15 @@ $("#formAbsensi").submit(function(e) {
                 title: 'Sukses!',
                 text: data.response,
                 icon: 'success',
+                confirmButtonColor: '#4cb8c4',
             })
         }).fail(function (data) {
-            
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops, Gagal Melakukan Absensi!',
+               text: 'Silahkan coba lagi, atau hubungi bagian Admin.',
+               confirmButtonColor: '#4cb8c4',
+            })
         })
       }
   })

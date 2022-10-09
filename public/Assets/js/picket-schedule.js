@@ -126,6 +126,7 @@ $(document).ready(function () {
                 title: 'Sukses!',
                 text: alert,
                 icon: 'success',
+                confirmButtonColor: '#4cb8c4',
             })
         }).fail(function (data) {
             $("#senin_error").html("")

@@ -26,8 +26,9 @@ class ProfilUserRequest extends FormRequest
     {
         $user = User::find($this->id_user);
         return [
-            'name'     => 'required',
-            'email'    => $this->email == $user->email ? ['required'] : ['required', 'unique:users,email'],
+            'name'      => 'required',
+            'email'     => $this->email == $user->email ? ['required'] : ['required', 'unique:users,email'],
+            'picture'   => ['mimes:png,jpeg,jpg','image'],
         ];
     }
 
@@ -37,6 +38,8 @@ class ProfilUserRequest extends FormRequest
             "name.required"     => "Nama Lengkap tidak boleh kosong.",
             "email.required"    => "Email tidak boleh kosong.",
             "email.unique"      => "Email ini sudah digunakan.",
+            'picture.image'     => 'Format foto profil bukan berupa gambar',
+            'picture.mimes'     => 'Format foto profil hanya boleh .png, .jpeg, dan .jpg',
         ];
     }
 }

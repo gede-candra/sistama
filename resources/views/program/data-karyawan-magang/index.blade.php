@@ -9,8 +9,7 @@
         <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center" style="gap: 15px;">
             <h6 class="m-0 font-weight-bold text-primary">Data Karyawan Magang CV Harmoni Permata</h6>
             <div class="d-flex">
-                <button type="button" class="btn btn-sm btn-primary shadow-sm" onclick="create()"><i
-                        class="fas fa-plus fa-sm"></i> Tambah Data </button>
+                <button type="button" class="btn btn-sm btn-primary shadow-sm" id="create-btn"><i class="fas fa-plus fa-sm"></i> Tambah Data </button>
                 <a href="{{ route('dataMagang.export') }}" class="btn btn-sm btn-outline-primary shadow-sm ml-2"><i class="fas fa-download fa-sm"></i> Generate Report</a>
             </div>
         </div>
@@ -78,7 +77,7 @@
 
     <!-- Modal Info -->
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="infoModalLabel">Info Karyawan Magang</h5>

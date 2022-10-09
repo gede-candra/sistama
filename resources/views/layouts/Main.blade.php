@@ -136,22 +136,21 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="d-flex flex-column text-gray-600 mr-2" style="text-align: end">
+                                <div class="d-none d-sm-flex flex-column text-gray-600 mr-2" style="text-align: end">
                                     <h3 class="font-weight-bold" style="font-size: 14px; margin-bottom: -2px;" id="namaUserLogin">{{ Auth::user()->name }}</h3>
                                     <span class="small font-weight-light">{{ Auth::user()->roles->name }}</span>
                                 </div>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
+                                <img id="image-user-profile" class="img-profile rounded-circle" src="{{ auth()->user()->picture ? url('uploads/images/user-profile/'.auth()->user()->picture) : asset('assets/img/undraw_profile_2.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item {{ request()->is('profil-saya') ? 'font-weight-bold text-primary' : '' }}" href="{{  route('profile.index') }}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 {{ request()->is('profil-saya') ? 'text-primary' : 'text-gray-400' }}"></i>
+                                    <i class="fas fa-user-circle fa-sm fa-fw mr-2 {{ request()->is('profil-saya') ? 'text-primary' : 'text-gray-400' }}"></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item {{ request()->is('ubah-password') ? 'font-weight-bold text-primary' : '' }}" href="{{ route('changePassword.index') }}">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 {{ request()->is('ubah-password') ? 'text-primary' : 'text-gray-400' }}"></i>
+                                    <i class="fas fa-shield-alt fa-sm fa-fw mr-2 {{ request()->is('ubah-password') ? 'text-primary' : 'text-gray-400' }}"></i>
                                     Ubah Password
                                 </a>
                                 <div class="dropdown-divider"></div>

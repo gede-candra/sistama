@@ -10,7 +10,7 @@ $("#formUbahPassword").submit(function(e) {
       title: 'Apakah anda yakin ingin password anda?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#4cb8c4',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ya, Ubah Password!'
       }).then((result) => {
@@ -41,6 +41,7 @@ $("#formUbahPassword").submit(function(e) {
                   title: 'Sukses!',
                   text: data.response,
                   icon: 'success',
+                  confirmButtonColor: '#4cb8c4',
                })
             }
          }).fail(function (data) {
@@ -57,6 +58,7 @@ $("#formUbahPassword").submit(function(e) {
                      title: 'Gagal Mengubah Password!',
                      text: "Silahkan coba lagi atau hubungi bagian admin untuk keterangan lebih lanjut.",
                      icon: 'error',
+                     confirmButtonColor: '#4cb8c4',
                   })
                }
          })
@@ -64,3 +66,16 @@ $("#formUbahPassword").submit(function(e) {
   })
 
 });
+
+$(".show-password, .hide-password").on('click', function() {
+   var passwordId = $(this).parents('div:first').find('input').attr('id');
+   if ($(this).hasClass('show-password')) {
+     $("#" + passwordId).attr("type", "text");
+     $(this).parent().find(".show-password").hide();
+     $(this).parent().find(".hide-password").show();
+   } else {
+     $("#" + passwordId).attr("type", "password");
+     $(this).parent().find(".hide-password").hide();
+     $(this).parent().find(".show-password").show();
+   }
+ });

@@ -80,6 +80,7 @@ $("#formAuth").submit(function (e) {
                icon: 'error',
                title: 'Oops, Login Gagal!',
                text: 'Email atau Password anda mungkin salah, Silahkan coba lagi atau hubungi bagian Admin untuk keterangan lebih lanjut.',
+               confirmButtonColor: '#4cb8c4',
            })
          }
       } else {
@@ -88,6 +89,7 @@ $("#formAuth").submit(function (e) {
             title: 'Sukses!',
             text: "Regristrasi Berhasil, silahkan login.",
             icon: 'success',
+            confirmButtonColor: '#4cb8c4',
          })
       }
       
@@ -109,7 +111,21 @@ $("#formAuth").submit(function (e) {
             icon: 'error',
             title: 'Oops, Kesalahan!',
             text: 'Silahkan coba lagi atau hubungi bagian admin untuk keterangan lebih lanjut.',
+            confirmButtonColor: '#4cb8c4',
         })
       }
    })
 });
+
+$(".show-password, .hide-password").on('click', function() {
+   var passwordId = $(this).parents('div:first').find('input').attr('id');
+   if ($(this).hasClass('show-password')) {
+     $("#" + passwordId).attr("type", "text");
+     $(this).parent().find(".show-password").hide();
+     $(this).parent().find(".hide-password").show();
+   } else {
+     $("#" + passwordId).attr("type", "password");
+     $(this).parent().find(".hide-password").hide();
+     $(this).parent().find(".show-password").show();
+   }
+ });

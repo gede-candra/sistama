@@ -35,9 +35,9 @@ class UserController extends Controller
                         ->addIndexColumn()
                         ->addColumn("opsi", function($data){
                             return "<div class='d-flex'>
-                                        <button onclick='info(".$data->id.")' data-id=".$data->id." class='btn rounded-circle btn-outline-info info'><i class='fa-solid fa-circle-info'></i></button>
-                                        <button onclick='edit(".$data->id.")' data-id=".$data->id." class='ml-2 btn rounded-circle btn-outline-warning edit'><i class='fa-solid fa-pen-to-square'></i></button>
-                                        <button type='submit' onclick='destroy(".$data->id.")' data-id=".$data->id." class='ml-2 btn rounded-circle btn-outline-danger delete'><i class='fa-solid fa-trash-can'></i></button>
+                                        <button type='button' onclick='info(".$data->id.")' class='btn rounded-circle btn-outline-info info'><i class='fa-solid fa-circle-info'></i></button>
+                                        <button type='button' onclick='edit(".$data->id.")' class='ml-2 btn rounded-circle btn-outline-warning edit'><i class='fa-solid fa-pen-to-square'></i></button>
+                                        <button type='button' onclick='destroy(".$data->id.")' class='ml-2 btn rounded-circle btn-outline-danger delete'><i class='fa-solid fa-trash-can'></i></button>
                                     </div>";
                         })
                         ->rawColumns(["opsi"])
@@ -96,8 +96,8 @@ class UserController extends Controller
     public function edit($id, Request $request)
     {
         if ($request->ajax()) {
-            $datauser       = User::all()->find($id);
-            $dataabsensi    = Attendance::all()->where('user_id', $id)->count();
+            $datauser       = User::findOrFail($id);
+            $dataabsensi    = Attendance::where('user_id', $id)->count();
             return response()->json([
                 'datauser'      => $datauser,
                 'dataabsensi'   => $dataabsensi,

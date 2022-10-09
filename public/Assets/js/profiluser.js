@@ -10,7 +10,7 @@ $("#formProfil").submit(function(e) {
       title: 'Apakah anda yakin ingin mengedit profil anda?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#4cb8c4',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ya, Edit!'
       }).then((result) => {
@@ -26,11 +26,13 @@ $("#formProfil").submit(function(e) {
             $("#name_error").html("")
             $("#email_error").html("")
             $("#namaUserLogin").html(data.namaUser)
+            $('#image-user-profile').attr('src', $('#image-profile').data('url')+'/'+data.fotoUser);
             Swal.fire({
                position: 'top',
                title: 'Sukses!',
                text: data.response,
                icon: 'success',
+               confirmButtonColor: '#4cb8c4',
             })
          }).fail(function (data) {
                if (data.responseJSON.errors != null) {
@@ -38,12 +40,15 @@ $("#formProfil").submit(function(e) {
                   $("#email_error").html("")
                   $("#name_error").html(data.responseJSON.errors.name)
                   $("#email_error").html(data.responseJSON.errors.email)
+                  $("#image_error").html(data.responseJSON.errors.picture[1])
+                  $("#image_format_error").html(data.responseJSON.errors.picture[0])
                } else {
                   Swal.fire({
                      position: 'top',
                      title: 'Gagal Mengedi Profil!',
                      text: "Silahkan coba lagi atau hubungi bagian admin untuk keterangan lebih lanjut.",
                      icon: 'error',
+                     confirmButtonColor: '#4cb8c4',
                   })
                }
          })
@@ -51,3 +56,19 @@ $("#formProfil").submit(function(e) {
   })
 
 });
+
+
+// ubah foto profil
+$("#edit-profile-image").change(function() {
+   readImageURL(this);
+});
+
+function readImageURL(input) {
+   if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function(e) {
+           $('#image-profile').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+   }
+}

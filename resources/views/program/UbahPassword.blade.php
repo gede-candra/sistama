@@ -14,7 +14,7 @@
                <div class="col-md-6 position-relative">
                   <input type="password" class="form-control " id="inputPassLama" name="pass_lama" style="padding-right: 34px;">
                   <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent show-password"><i class="fas fa-eye text-secondary"></i></button>
-                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye-slash text-secondary"></i></button>
+                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye text-primary"></i></button>
                   <span id="pass_lama_error" class="error"></span>
                </div>
             </div>
@@ -24,7 +24,7 @@
                <div class="col-md-6">
                   <input type="password" class="form-control" id="inputPassBaru" name="pass_baru" style="padding-right: 34px;">
                   <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent show-password"><i class="fas fa-eye text-secondary"></i></button>
-                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye-slash text-secondary"></i></button>
+                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye text-primary"></i></button>
                   <span id="pass_baru_error" class="error"></span>
                </div>
             </div>
@@ -34,7 +34,7 @@
                <div class="col-md-6">
                   <input type="password" class="form-control" id="inputKonPassBaru" name="konfirmasi_pass_baru" style="padding-right: 34px;">
                   <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent show-password"><i class="fas fa-eye text-secondary"></i></button>
-                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye-slash text-secondary"></i></button>
+                  <button type="button" class="position-absolute top-6 right-15 border-0 bg-transparent hide-password" style="display: none;"><i class="fas fa-eye text-primary"></i></button>
                   <span id="konfirmasi_pass_baru_error" class="error"></span>
                </div>
             </div>

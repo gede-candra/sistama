@@ -85,7 +85,7 @@
                     <div class="position-relative">
                         <input type="password" id="password" class="form-control" name="password" style="padding-right: 34px;" />
                         <button type="button" class="position-absolute top-6 border-0 bg-transparent show-password" style="right: 10px"><i class="fas fa-eye text-secondary"></i></button>
-                        <button type="button" class="position-absolute top-6 border-0 bg-transparent hide-password" style="right: 10px; display: none;"><i class="fas fa-eye-slash text-secondary"></i></button>
+                        <button type="button" class="position-absolute top-6 border-0 bg-transparent hide-password" style="right: 10px; display: none;"><i class="fas fa-eye text-primary"></i></button>
                     </div>
                     <span id="password_error" class="error">Lorem ipsum dolor sit amet.</span>
                 </div>
